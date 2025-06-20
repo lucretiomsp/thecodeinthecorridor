@@ -44,8 +44,19 @@ Corridor class >> loadAllSynths [
 
 	allSynths := OrderedCollection new.
 	allSynths
-		add: (TpReese new sustain: 0.2 asBox; attack: 0.01 asBox; decay: 0.2 asBox);
-		add: Dirac new;
-		add: PhCapture new;
-		add: PhLooper new
+	add: PhCapture new;
+		add: PhLooper new;
+		add: (TpReese new
+				 sustain: 0.2 asBox;
+				 attack: 0.01 asBox;
+				 decay: 0.2 asBox);
+		add: Dirac new.
+		
+]
+
+{ #category : 'loading' }
+Corridor class >> loadRack [
+	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
+
+	rack := self allInstruments asSumOfUGen
 ]
