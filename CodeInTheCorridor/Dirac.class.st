@@ -74,7 +74,8 @@ Dirac >> initialize [
 		            release: 0.14 asBox.
 	sine := SineOsc new
 		        label: 'DiracBass';
-		        freq: #( 46 30 70 1 ).
+		        freq: #( 46 30 70 1 );
+		uLevel: #(0.3 0 0.5 0.001).
 	bass := sine => envelope.
 	filter := ResonHp new label: 'Dirac'
 ]

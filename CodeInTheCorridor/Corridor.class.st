@@ -43,6 +43,8 @@ Corridor class >> loadAllSynths [
 	"load all TurboSynths - kept empty for now"
 
 	allSynths := OrderedCollection new.
-	allSynths add: TpReese new.
-	
+	allSynths add: TpReese new;
+	add: Dirac  new;
+	add: PhCapture new;
+	add: PhLooper new.
 ]
