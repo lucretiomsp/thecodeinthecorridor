@@ -1,5 +1,8 @@
+"
+MethodProxies handling to: message for Sequencer
+"
 Class {
-	#name : 'LFOIndexHandler',
+	#name : 'SeqToPerfHandler',
 	#superclass : 'MpHandler',
 	#instVars : [
 		'space'
@@ -10,24 +13,24 @@ Class {
 }
 
 { #category : 'evaluating' }
-LFOIndexHandler >> afterMethod [ 
+SeqToPerfHandler >> afterMethod [ 
 
 self space root background: Color random
 ]
 
 { #category : 'initialization' }
-LFOIndexHandler >> initialize [ 
+SeqToPerfHandler >> initialize [ 
 super initialize 
 ]
 
 { #category : 'accessing' }
-LFOIndexHandler >> space [
+SeqToPerfHandler >> space [
 
 	^ space
 ]
 
 { #category : 'accessing' }
-LFOIndexHandler >> space: aSpace [
+SeqToPerfHandler >> space: aSpace [
 
 	space := aSpace
 ]
