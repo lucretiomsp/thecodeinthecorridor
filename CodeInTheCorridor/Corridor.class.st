@@ -207,14 +207,21 @@ Corridor >> initializeCaptureControls [
 	insets := BlInsets all: 16.
 	paramDic := self class tpDsp getUIItemsLabeledDictionary.
 	captureContainer := BlElement new
-		                    background: Color blue lighter;
+		                    background: Color black;
 		                    layout: BlLinearLayout horizontal;
 		                    size: 1000 @ 300.
 	captureLevel := ICMixerSlider new
-		                fromDictionary: (paramDic at: #CaptureLevel)
+		                fromDictionary: (paramDic at: #CaptureuLevel)
 		                forDsp: self class tpDsp.
+	captureButton := ICLabelButton new
+		                 fromDictionary:( paramDic at: #Capture)
+		                 forDsp: self class tpDsp.
 
-	captureContainer addChild: (captureLevel
-			 margin: insets;
-			 padding: insets)
+	captureContainer
+		addChild: (captureLevel
+				 margin: insets;
+				 padding: insets);
+		addChild: (captureButton
+				 margin: insets;
+				 padding: insets)
 ]
