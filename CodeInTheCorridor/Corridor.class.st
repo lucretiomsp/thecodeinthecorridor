@@ -9,7 +9,8 @@ Class {
 		'snare',
 		'hat',
 		'conga',
-		'axis1'
+		'axis1',
+		'axis2'
 	],
 	#category : 'CodeInTheCorridor',
 	#package : 'CodeInTheCorridor'
@@ -95,21 +96,41 @@ Corridor >> axis1 [
 ^ axis1
 ]
 
+{ #category : 'accessing' }
+Corridor >> axis2 [
+
+	^ axis2
+]
+
 { #category : 'ui building' }
 Corridor >> displayMinimalUI [
 
-	| space |
+	| space insets paramDic |
 	self initializeAxisControls.
+	paramDic := self class tpDsp getUIItemsLabeledDictionary .
+	insets := BlInsets all: 16.
 	space := BlSpace new.
-	space root background: Color black.
-	space root addChild: self axis1.
+	space root
+		background: Color black;
+		layout: BlLinearLayout horizontal.
+
+	space root
+		addChild: (self axis1
+				 margin: insets;
+				 padding: insets);
+		addChild: (self axis2
+				 margin: insets;
+				 padding: insets).
+   space root addChild: (ICMixerSlider new fromDictionary: (paramDic at: #DiracLevel) forDsp: self class tpDsp). 
 	space show
 ]
 
 { #category : 'ui building' }
 Corridor >> initializeAxisControls [
-
-	axis1 := ICAxis new widgetSize: 500 @ 200.
+	"axis1"
+|size |
+size := 400 @ 160 .
+	axis1 := ICAxis new widgetSize: size.
 	axis1 minX: 0.01.
 	axis1 maxX: 1.
 	axis1 minY: 25.
@@ -117,11 +138,29 @@ Corridor >> initializeAxisControls [
 	axis1 xLabel: 'DiracPeriod'.
 	axis1 yLabel: 'DiracCutoff'.
 	axis1 arrowColor: Color white.
-	axis1 backgroundColor: Color darkGray .
+	axis1 backgroundColor: Color darkGray.
 	axis1 cursorSize: 12.
 	axis1 callBack: [ :x :y |
 			self class tpDsp
 				setValue: x parameter: 'DiracPeriod';
 				setValue: y parameter: 'DiracFrequency' ].
-	axis1 position: 50 asPoint
+	axis1 position: 50 asPoint.
+
+	"axis2"
+	axis2 := ICAxis new widgetSize: size.
+	axis2 minX: 46.
+	axis2 maxX: 70.
+	axis2 minY: 25.
+	axis2 maxY: 0.
+	axis2 xLabel: 'DiracBassLevel'.
+	axis2 yLabel: 'DiracBassFreq'.
+	axis2 arrowColor: Color white.
+	axis2 backgroundColor: Color darkGray.
+	axis2 cursorSize: 12.
+	axis2 cursorColor: Color red.
+	axis2 callBack: [ :x :y |
+			self class tpDsp
+				setValue: x parameter: 'DiracBassFreq';
+				setValue: y parameter: 'DiracBassULevel' ].
+	axis2 position: 50 asPoint
 ]
