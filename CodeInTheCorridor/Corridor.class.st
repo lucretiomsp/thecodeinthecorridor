@@ -77,10 +77,10 @@ Corridor class >> loadAllSynths [
 		       sustain: 0.3 asBox;
 		       release: 0.19 asBox; dsfreq: 180 asBox ; q: 4 asBox.
 	allSynths := {
-		             PhCapture new.
+		             PhCapture new => PhHBarGraph new label: 'captured'.
 		             PhLooper new.
 		             reese.
-		             Dirac new.
+		             Dirac new => PhHBarGraph new label: 'dirac'.
 		             psg }.
 
 	^ self
@@ -125,7 +125,7 @@ Corridor >> displayMinimalUI [
 
 
 	space := BlSpace new.
-	space extent: 1000 @ 600.
+	space extent: 720 @ 500.
 	space root
 		background: Color black;
 		layout: (BlGridLayout new columnCount: 1).
@@ -134,7 +134,7 @@ Corridor >> displayMinimalUI [
 		addChild: self diracContainer;
 		addChild: self captureContainer.
 
-	space show
+	space useMorphicHost; show
 ]
 
 { #category : 'ui building' }
@@ -147,8 +147,8 @@ Corridor >> initializeAxisControls [
 	diracContainer := BlElement new
 		                  background: Color red darker;
 		                  layout: BlLinearLayout horizontal;
-		                  size: 1000 @ 300.
-	size := 400 @ 160.
+		                  size: 1000 @ 240.
+	size := 280 @ 140.
 	axis1 := ICAxis new widgetSize: size.
 	axis1 minX: 0.01.
 	axis1 maxX: 1.

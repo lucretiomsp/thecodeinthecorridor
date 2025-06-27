@@ -19,7 +19,7 @@ Dirac >> asBox [
 
 	| level |
 	level := PhHSlider new label: 'DiracuLevel'.
-	^ (self generator + self bass => self filter * level) asBox
+	^ (self generator + self bass => self filter * level)  asBox
 ]
 
 { #category : 'accessing' }

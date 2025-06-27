@@ -1,3 +1,6 @@
+"
+MethoProxies Handler for Performance >> solo:
+"
 Class {
 	#name : 'SeqSoloHandler',
 	#superclass : 'MpHandler',
