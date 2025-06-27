@@ -10,7 +10,11 @@ Class {
 		'rect1',
 		'rect2',
 		'rect3',
-		'hats'
+		'hats',
+		'snare'
+	],
+	#classInstVars : [
+		'snareIcon'
 	],
 	#category : 'CodeInTheCorridor-Graphic',
 	#package : 'CodeInTheCorridor',
@@ -52,8 +56,10 @@ super initialize .
 self initializeRects .
 self initializeHiHats.
 kickBall := (NcCircle new background: Color red) position: self centerCoordinates .
+snare := ICBassDrumIcon  new.
 
 self root addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall .
+self root addChild: snare
 
 ]
 
@@ -98,4 +104,10 @@ CorridorSpace >> rect2 [
 CorridorSpace >> rect3 [
 
 	^ rect3
+]
+
+{ #category : 'accessing' }
+CorridorSpace >> snare [
+
+^ snare
 ]
