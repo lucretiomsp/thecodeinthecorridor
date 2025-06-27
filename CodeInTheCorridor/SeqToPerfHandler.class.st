@@ -11,26 +11,3 @@ Class {
 	#package : 'CodeInTheCorridor',
 	#tag : 'MethodProxies'
 }
-
-{ #category : 'evaluating' }
-SeqToPerfHandler >> afterMethod [ 
-
-self space root background: Color random
-]
-
-{ #category : 'initialization' }
-SeqToPerfHandler >> initialize [ 
-super initialize 
-]
-
-{ #category : 'accessing' }
-SeqToPerfHandler >> space [
-
-	^ space
-]
-
-{ #category : 'accessing' }
-SeqToPerfHandler >> space: aSpace [
-
-	space := aSpace
-]
