@@ -67,7 +67,11 @@ Corridor class >> loadAllSynths [
 		         sustain: 0.2 asBox;
 		         attack: 0.01 asBox;
 		         decay: 0.2 asBox.
-	psg := PsgPlus new attack: 0.01 asBox; decay: 0.25 asBox; sustain: 0.3 asBox; release: 0.19 asBox.
+	psg := PsgPlus new
+		       attack: 0.01 asBox;
+		       decay: 0.25 asBox;
+		       sustain: 0.3 asBox;
+		       release: 0.19 asBox; dsfreq: 180 asBox ; q: 4 asBox.
 	allSynths := {
 		             PhCapture new.
 		             PhLooper new.
