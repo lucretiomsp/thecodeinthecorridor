@@ -18,8 +18,8 @@ Class {
 Dirac >> asBox [
 
 	| level |
-	level := PhHSlider new label: 'DiracLevel'.
-	^ ((self generator + self bass) => self filter * level) asBox
+	level := PhHSlider new label: 'DiracUlevel'.
+	^ (self generator + self bass => self filter * level) asBox
 ]
 
 { #category : 'accessing' }
