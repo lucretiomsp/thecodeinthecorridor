@@ -101,7 +101,7 @@ Corridor >> displayMinimalUI [
 	| space |
 	self initializeAxisControls.
 	space := BlSpace new.
-	space root background: Color white.
+	space root background: Color black.
 	space root addChild: self axis1.
 	space show
 ]
@@ -116,6 +116,9 @@ Corridor >> initializeAxisControls [
 	axis1 maxY: 20000.
 	axis1 xLabel: 'DiracPeriod'.
 	axis1 yLabel: 'DiracCutoff'.
+	axis1 arrowColor: Color white.
+	axis1 backgroundColor: Color darkGray .
+	axis1 cursorSize: 12.
 	axis1 callBack: [ :x :y |
 			self class tpDsp
 				setValue: x parameter: 'DiracPeriod';
