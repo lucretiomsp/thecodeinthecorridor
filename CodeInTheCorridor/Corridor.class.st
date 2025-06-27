@@ -8,7 +8,8 @@ Class {
 		'kick',
 		'snare',
 		'hat',
-		'conga'
+		'conga',
+		'axis1'
 	],
 	#category : 'CodeInTheCorridor',
 	#package : 'CodeInTheCorridor'
@@ -87,4 +88,37 @@ Corridor class >> loadRack [
 	"load the chain of synthesizers, effects and filter which become the TurboPhausto dsp"
 
 	rack := self allInstruments asSumOfUGen
+]
+
+{ #category : 'accessing' }
+Corridor >> axis1 [ 
+^ axis1
+]
+
+{ #category : 'ui building' }
+Corridor >> displayMinimalUI [
+
+	| space |
+	self initializeAxisControls.
+	space := BlSpace new.
+	space root background: Color white.
+	space root addChild: self axis1.
+	space show
+]
+
+{ #category : 'ui building' }
+Corridor >> initializeAxisControls [
+
+	axis1 := ICAxis new widgetSize: 500 @ 200.
+	axis1 minX: 0.01.
+	axis1 maxX: 1.
+	axis1 minY: 25.
+	axis1 maxY: 20000.
+	axis1 xLabel: 'DiracPeriod'.
+	axis1 yLabel: 'DiracCutoff'.
+	axis1 callBack: [ :x :y |
+			self class tpDsp
+				setValue: x parameter: 'DiracPeriod';
+				setValue: y parameter: 'DiracFrequency' ].
+	axis1 position: 50 asPoint
 ]
