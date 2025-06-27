@@ -11,7 +11,8 @@ Class {
 		'conga',
 		'axis1',
 		'axis2',
-		'diracContainer'
+		'diracContainer',
+		'captureContainer'
 	],
 	#category : 'CodeInTheCorridor',
 	#package : 'CodeInTheCorridor'
@@ -104,6 +105,12 @@ Corridor >> axis2 [
 ]
 
 { #category : 'accessing' }
+Corridor >> captureContainer [
+
+	^ captureContainer 
+]
+
+{ #category : 'accessing' }
 Corridor >> diracContainer [
 
 	^ diracContainer
@@ -114,15 +121,18 @@ Corridor >> displayMinimalUI [
 
 	| space |
 	self initializeAxisControls.
+	self initializeCaptureControls.
 
 
 	space := BlSpace new.
-	space extent: 1000@600.
+	space extent: 1000 @ 600.
 	space root
 		background: Color black;
-		layout: BlLinearLayout horizontal.
+		layout: (BlGridLayout new columnCount: 1).
 
-	space root addChild: self diracContainer.
+	space root
+		addChild: self diracContainer;
+		addChild: self captureContainer.
 
 	space show
 ]
@@ -135,7 +145,7 @@ Corridor >> initializeAxisControls [
 	insets := BlInsets all: 16.
 	paramDic := self class tpDsp getUIItemsLabeledDictionary.
 	diracContainer := BlElement new
-		                  background: Color red darker ;
+		                  background: Color red darker;
 		                  layout: BlLinearLayout horizontal;
 		                  size: 1000 @ 300.
 	size := 400 @ 160.
@@ -154,8 +164,8 @@ Corridor >> initializeAxisControls [
 				setValue: x parameter: 'DiracPeriod';
 				setValue: y parameter: 'DiracFrequency' ].
 	axis1 position: 50 asPoint.
-	axis1 transformDo: [ :t | t translateBy: 30@0 ].
-	
+	axis1 transformDo: [ :t | t translateBy: 30 @ 0 ].
+
 
 	"axis2"
 	axis2 := ICAxis new widgetSize: size.
@@ -174,7 +184,7 @@ Corridor >> initializeAxisControls [
 				setValue: x parameter: 'DiracBassFreq';
 				setValue: y parameter: 'DiracBassULevel' ].
 	axis2 position: 50 asPoint.
-	axis2 transformDo: [ :t | t translateBy: 30@0 ].
+	axis2 transformDo: [ :t | t translateBy: 30 @ 0 ].
 
 	diracContainer
 		addChild: (self axis1
@@ -184,8 +194,27 @@ Corridor >> initializeAxisControls [
 				 margin: insets;
 				 padding: insets).
 	diracContainer addChild: ((ICMixerSlider new
-			 fromDictionary: (paramDic at: #DiracLevel)
-			 forDsp: self class tpDsp) margin: insets;
-				 padding: insets).
+			  fromDictionary: (paramDic at: #DiracuLevel)
+			  forDsp: self class tpDsp)
+			 margin: insets;
+			 padding: insets)
+]
 
+{ #category : 'ui building' }
+Corridor >> initializeCaptureControls [
+
+	| size insets paramDic captureButton captureLevel |
+	insets := BlInsets all: 16.
+	paramDic := self class tpDsp getUIItemsLabeledDictionary.
+	captureContainer := BlElement new
+		                    background: Color blue lighter;
+		                    layout: BlLinearLayout horizontal;
+		                    size: 1000 @ 300.
+	captureLevel := ICMixerSlider new
+		                fromDictionary: (paramDic at: #CaptureLevel)
+		                forDsp: self class tpDsp.
+
+	captureContainer addChild: (captureLevel
+			 margin: insets;
+			 padding: insets)
 ]
