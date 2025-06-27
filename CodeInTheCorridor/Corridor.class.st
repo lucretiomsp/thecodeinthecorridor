@@ -54,12 +54,12 @@ Corridor class >> loadAllSamplers [
 			      '/Users/domenicocipriani/MyStuff/samples/California-Drums-Studio-City/Hats/H-CH.wav'.
 
 	allSamplers := {
-		               kick.
-		               snare.
+		               kick => PhHBarGraph new label: 'kick'.
+		               snare => PhHBarGraph new label: 'snare'.
 		               hat.
 		               conga.
 		               pad.
-		               hh }
+		               hh => PhHBarGraph new label: 'hh' }
 ]
 
 { #category : 'loading' }

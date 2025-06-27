@@ -23,7 +23,7 @@ CCDiracRects >> initialize [
 		addChild: rect1;
 		addChild: rect2;
 		addChild: rect3.
-	self background: Color red.
+	self background: Color white.
 	self size: NcSpace extent
 ]
 
