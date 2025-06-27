@@ -1,5 +1,5 @@
 Class {
-	#name : 'SeqMuteHandler',
+	#name : 'SeqSoloHandler',
 	#superclass : 'MpHandler',
 	#instVars : [
 		'space'
@@ -10,25 +10,25 @@ Class {
 }
 
 { #category : 'evaluating' }
-SeqMuteHandler >> afterMethod [ 
+SeqSoloHandler >> afterMethod [ 
 
 self space root background: Color white 
 ]
 
 { #category : 'initialization' }
-SeqMuteHandler >> initialize [ 
+SeqSoloHandler >> initialize [ 
 
 super initialize 
 ]
 
 { #category : 'accessing' }
-SeqMuteHandler >> space [
+SeqSoloHandler >> space [
 
 	^ space
 ]
 
 { #category : 'accessing' }
-SeqMuteHandler >> space: aSpace [
+SeqSoloHandler >> space: aSpace [
 
 	space := aSpace
 ]

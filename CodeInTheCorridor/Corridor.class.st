@@ -20,14 +20,17 @@ Corridor class >> loadAllSamplers [
 	| kick snare hat conga pad hh |
 	kick := TpSampler new
 		        label: 'kick';
+		        index: 0 asBox;
 		        pathToFile:
 			        '/Users/domenicocipriani/MyStuff/samples/California-Drums-Studio-City/Kicks/B-Kick3Nine.wav '.
 	snare := TpSampler new
 		         label: 'snare';
+		index: 0 asBox;
 		         pathToFile:
 			         '/Users/domenicocipriani/MyStuff/samples/California-Drums-Studio-City/Snares/Su-Snr3.wav'.
 	hat := TpSampler new
 		       label: 'hat';
+		       index: 0 asBox;
 		       pathToFile:
 			       '/Users/domenicocipriani/MyStuff/samples/California-Drums-Studio-City/Hats/JS-Hat6.wav'.
 	conga := TpSampler new
@@ -36,11 +39,13 @@ Corridor class >> loadAllSamplers [
 			         '/Users/domenicocipriani/Documents/TurboSamples/conga'.
 	pad := TpSampler new
 		       label: 'pad';
+		       index: 0 asBox;
 		       pathToFile:
 			       '/Users/domenicocipriani/Documents/MoofLodSamples/23_PadJunglAmb.wav'.
 
 	hh := TpSampler new
 		      label: 'hh';
+		      index: 0 asBox;
 		      pathToFile:
 			      '/Users/domenicocipriani/MyStuff/samples/California-Drums-Studio-City/Hats/H-CH.wav'.
 
@@ -57,17 +62,18 @@ Corridor class >> loadAllSamplers [
 Corridor class >> loadAllSynths [
 	"load all TurboSynths - kept empty for now"
 
-	| reese |
+	| reese psg |
 	reese := TpReese new
 		         sustain: 0.2 asBox;
 		         attack: 0.01 asBox;
 		         decay: 0.2 asBox.
+	psg := PsgPlus new attack: 0.01 asBox; decay: 0.25 asBox; sustain: 0.3 asBox; release: 0.19 asBox.
 	allSynths := {
 		             PhCapture new.
 		             PhLooper new.
 		             reese.
 		             Dirac new.
-		PsgPlus new }.
+		             psg }.
 
 	^ self
 ]
