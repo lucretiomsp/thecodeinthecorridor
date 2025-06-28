@@ -11,7 +11,8 @@ Class {
 		'rect2',
 		'rect3',
 		'hats',
-		'snare'
+		'snare',
+		'notes'
 	],
 	#classInstVars : [
 		'snareIcon'
@@ -20,6 +21,16 @@ Class {
 	#package : 'CodeInTheCorridor',
 	#tag : 'Graphic'
 }
+
+{ #category : 'adding' }
+CorridorSpace >> addNotesNumberFromString: aString [
+
+| collection entries |
+collection  := aString  findBetweenSubstrings: ','.
+entries := collection collect: [ :c | BlTextElement new text: (c asString asRopedText foreground: Color orange; fontSize: 48) ].
+
+self notes  addChildren: entries.
+]
 
 { #category : 'accessing' }
 CorridorSpace >> diracs [
@@ -55,11 +66,13 @@ CorridorSpace >> initialize [
 super initialize .
 self initializeRects .
 self initializeHiHats.
+self initializeNotesContainer .
+
 kickBall := (NcCircle new background: Color red) position: self centerCoordinates .
 snare := ICBassDrumIcon  new.
 
 self root addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall .
-self root addChild: snare
+self root addChild: snare; addChild: notes
 
 ]
 
@@ -75,6 +88,15 @@ hats := BlElement new background: Color transparent; layout: BlLinearLayout hori
 ]
 
 { #category : 'initialization' }
+CorridorSpace >> initializeNotesContainer [
+
+notes := BlElement new background: Color transparent ; 
+layout: (BlGridLayout new columnCount: 3);
+size: 400@400;
+position: 300@300
+]
+
+{ #category : 'initialization' }
 CorridorSpace >> initializeRects [
 
 rect1 := NcRect new position: 0@100.
@@ -86,6 +108,12 @@ rect3 := NcRect new position: 0@500.
 CorridorSpace >> kickBall [
 
 	^ kickBall
+]
+
+{ #category : 'accessing' }
+CorridorSpace >> notes [
+
+^ notes
 ]
 
 { #category : 'accessing' }
@@ -104,6 +132,12 @@ CorridorSpace >> rect2 [
 CorridorSpace >> rect3 [
 
 	^ rect3
+]
+
+{ #category : 'removing' }
+CorridorSpace >> removeNotes [
+
+self root removeChild: notes
 ]
 
 { #category : 'accessing' }

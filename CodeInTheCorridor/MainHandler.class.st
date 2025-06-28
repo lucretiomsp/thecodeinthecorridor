@@ -1,3 +1,6 @@
+"
+Main Handler for the Performance
+"
 Class {
 	#name : 'MainHandler',
 	#superclass : 'MpHandler',
