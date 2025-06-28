@@ -81,7 +81,7 @@ Corridor class >> loadAllSynths [
 		             PhLooper new.
 		             reese.
 		             Dirac new => PhHBarGraph new label: 'dirac'.
-		             psg }.
+		             psg  => PhHBarGraph new label: 'psg'}.
 
 	^ self
 ]

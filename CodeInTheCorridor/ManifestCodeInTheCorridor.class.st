@@ -8,3 +8,10 @@ Class {
 	#package : 'CodeInTheCorridor',
 	#tag : 'Manifest'
 }
+
+{ #category : 'code-critics' }
+ManifestCodeInTheCorridor class >> ruleUnoptimizedToDoRuleV1FalsePositive [
+
+	<ignoreForCoverage>
+	^ #(#(#(#RGMethodDefinition #(#CorridorSpace #initializeHiHats #false)) #'2025-06-28T10:18:41.029966+02:00') )
+]

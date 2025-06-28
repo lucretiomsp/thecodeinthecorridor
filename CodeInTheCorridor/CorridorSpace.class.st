@@ -27,7 +27,7 @@ CorridorSpace >> addNotesNumberFromString: aString [
 
 | collection entries |
 collection  := aString  findBetweenSubstrings: ','.
-entries := collection collect: [ :c | BlTextElement new text: (c asString asRopedText foreground: Color orange; fontSize: 48) ].
+entries := collection collect: [ :c | BlTextElement new text: ((c asString , ' ' )asRopedText foreground: Color orange; fontSize: 29) ].
 
 self notes  addChildren: entries.
 ]
@@ -38,7 +38,7 @@ CorridorSpace >> diracs [
 ^ diracs
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resizer' }
 CorridorSpace >> diracsWIdth: anInteger [
 
 
@@ -54,7 +54,7 @@ CorridorSpace >> hats [
 ^ hats
 ]
 
-{ #category : 'as yet unclassified' }
+{ #category : 'resizer' }
 CorridorSpace >> hatsSize: aPoint [
 
 self hats children do: [ :h | h size: aPoint ]
@@ -71,8 +71,8 @@ self initializeNotesContainer .
 kickBall := (NcCircle new background: Color red) position: self centerCoordinates .
 snare := ICBassDrumIcon  new.
 
-self root addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall .
-self root addChild: snare; addChild: notes
+self root addChild: notes;  addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall .
+self root addChild: snare 
 
 ]
 
@@ -81,7 +81,7 @@ CorridorSpace >> initializeHiHats [
 
 | insets |
 insets := BlInsets all: 4.
-hats := BlElement new background: Color transparent; layout: BlLinearLayout horizontal; size: 600@ 100 .
+hats := BlElement new background: Color transparent; layout: BlLinearLayout horizontal; size: 600@ 100; position: 200@540 .
 (1 to: 8) do:  [:i | hats addChild: 
 	((BlElement  new background:Color blue lighter ) margin: insets ; padding: insets)].
 
@@ -93,7 +93,7 @@ CorridorSpace >> initializeNotesContainer [
 notes := BlElement new background: Color transparent ; 
 layout: (BlGridLayout new columnCount: 3);
 size: 400@400;
-position: 300@300
+position: 0@360
 ]
 
 { #category : 'initialization' }
@@ -114,6 +114,12 @@ CorridorSpace >> kickBall [
 CorridorSpace >> notes [
 
 ^ notes
+]
+
+{ #category : 'resizer' }
+CorridorSpace >> notesSize: aPoint [
+
+self notes children do: [ :n | n size: aPoint ]
 ]
 
 { #category : 'accessing' }
@@ -144,4 +150,10 @@ self root removeChild: notes
 CorridorSpace >> snare [
 
 ^ snare
+]
+
+{ #category : 'resizer' }
+CorridorSpace >> snareSize: aPoint [
+
+self snare size: aPoint 
 ]

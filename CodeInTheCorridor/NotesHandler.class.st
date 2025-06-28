@@ -9,6 +9,14 @@ Class {
 	#tag : 'MethodProxies'
 }
 
+{ #category : 'evaluating' }
+NotesHandler >> afterExecutionWithReceiver: anObject arguments: anArrayOfObjects returnValue: aReturnValue [
+
+self space addNotesNumberFromString: anObject.
+
+^ aReturnValue 
+]
+
 { #category : 'initialization' }
 NotesHandler >> initialize [ 
 
