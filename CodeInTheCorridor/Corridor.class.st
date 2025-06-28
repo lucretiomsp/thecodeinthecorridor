@@ -125,10 +125,10 @@ Corridor >> displayMinimalUI [
 
 
 	space := BlSpace new.
-	space extent: 720 @ 500.
+	space extent: 880 @ 280.
 	space root
 		background: Color black;
-		layout: (BlGridLayout new columnCount: 1).
+		layout: (BlGridLayout new columnCount: 2).
 
 	space root
 		addChild: self diracContainer;
@@ -142,13 +142,13 @@ Corridor >> initializeAxisControls [
 	"axis1"
 
 	| size insets paramDic |
-	insets := BlInsets all: 16.
+	insets := BlInsets all: 26.
 	paramDic := self class tpDsp getUIItemsLabeledDictionary.
 	diracContainer := BlElement new
 		                  background: Color red darker;
 		                  layout: BlLinearLayout horizontal;
-		                  size: 1000 @ 240.
-	size := 280 @ 140.
+		                  size: 620 @ 290.
+	size := 200 @ 130.
 	axis1 := ICAxis new widgetSize: size.
 	axis1 minX: 0.01.
 	axis1 maxX: 1.
@@ -163,18 +163,18 @@ Corridor >> initializeAxisControls [
 			self class tpDsp
 				setValue: x parameter: 'DiracPeriod';
 				setValue: y parameter: 'DiracFrequency' ].
-	axis1 position: 50 asPoint.
-	axis1 transformDo: [ :t | t translateBy: 30 @ 0 ].
+
+
 
 
 	"axis2"
 	axis2 := ICAxis new widgetSize: size.
 	axis2 minX: 46.
 	axis2 maxX: 70.
-	axis2 minY: 25.
-	axis2 maxY: 0.
-	axis2 xLabel: 'DiracBassLevel'.
-	axis2 yLabel: 'DiracBassFreq'.
+	axis2 minY: 0.
+	axis2 maxY: 0.4.
+	axis2 xLabel: 'DiracBassFreq'.
+	axis2 yLabel: 'DiracBassLevel'.
 	axis2 arrowColor: Color white.
 	axis2 backgroundColor: Color darkGray.
 	axis2 cursorSize: 12.
@@ -183,21 +183,20 @@ Corridor >> initializeAxisControls [
 			self class tpDsp
 				setValue: x parameter: 'DiracBassFreq';
 				setValue: y parameter: 'DiracBassULevel' ].
-	axis2 position: 50 asPoint.
-	axis2 transformDo: [ :t | t translateBy: 30 @ 0 ].
-
-	diracContainer
-		addChild: (self axis1
-				 margin: insets;
-				 padding: insets);
-		addChild: (self axis2
-				 margin: insets;
-				 padding: insets).
-	diracContainer addChild: ((ICMixerSlider new
+	
+diracContainer addChild: ((ICMixerSlider new
 			  fromDictionary: (paramDic at: #DiracuLevel)
 			  forDsp: self class tpDsp)
 			 margin: insets;
-			 padding: insets)
+			 padding: insets).
+	diracContainer
+		addChild: (self axis1
+				 margin: insets;
+				 padding: insets );
+		addChild: (self axis2
+				 margin: insets;
+				 padding: insets).
+	
 ]
 
 { #category : 'ui building' }
