@@ -58,7 +58,7 @@ Corridor class >> loadAllSamplers [
 		               snare => PhHBarGraph new label: 'snare'.
 		               hat.
 		               conga.
-		               pad.
+		               pad  => PhHBarGraph new label: 'pad'.
 		               hh => PhHBarGraph new label: 'hh' }
 ]
 

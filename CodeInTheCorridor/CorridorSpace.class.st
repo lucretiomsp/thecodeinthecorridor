@@ -12,7 +12,8 @@ Class {
 		'rect3',
 		'hats',
 		'snare',
-		'notes'
+		'notes',
+		'captureContainer'
 	],
 	#classInstVars : [
 		'snareIcon'
@@ -30,6 +31,18 @@ collection  := aString  findBetweenSubstrings: ','.
 entries := collection collect: [ :c | BlTextElement new text: ((c asString , ' ' )asRopedText foreground: Color orange; fontSize: 29) ].
 
 self notes  addChildren: entries.
+]
+
+{ #category : 'accessing' }
+CorridorSpace >> captureContainer [ 
+
+^ captureContainer 
+]
+
+{ #category : 'resizer' }
+CorridorSpace >> captureSize: aNumber [
+
+self captureContainer transformDo: [ :t | t scaleBy: aNumber * 4]
 ]
 
 { #category : 'accessing' }
@@ -67,12 +80,22 @@ super initialize .
 self initializeRects .
 self initializeHiHats.
 self initializeNotesContainer .
+self initializeCapture .
 
 kickBall := (NcCircle new background: Color red) position: self centerCoordinates .
 snare := ICBassDrumIcon  new.
 
-self root addChild: notes;  addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall .
-self root addChild: snare 
+self root addChild: notes;   addChild: hats; addChild: rect1; addChild: rect2; addChild: rect3; addChild: kickBall.
+self root addChild: snare .
+self root addChild: captureContainer .
+
+]
+
+{ #category : 'initialization' }
+CorridorSpace >> initializeCapture [
+
+captureContainer := BlElement new background: Color transparent; size: 300@500.
+1 to: 32 do: [ :i | captureContainer addChild: (NcCircle new  diameter: 10; position: (Random new nextIntegerBetween: 10 and: 380 )@ (Random new nextIntegerBetween: 10 and: 300 ) )].
 
 ]
 
@@ -144,6 +167,12 @@ CorridorSpace >> rect3 [
 CorridorSpace >> removeNotes [
 
 self root removeChild: notes
+]
+
+{ #category : 'instance creation' }
+CorridorSpace >> rotate: aDegree [
+
+self root  children do: [:c | c transformDo: [ :t | t rotateBy: aDegree ]]
 ]
 
 { #category : 'accessing' }
